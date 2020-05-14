@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/profile.css">
+</head>
+<body>
+    <div class="container-fluid">
+	<a href="/home" class="btn btn-warning back">Trở lại</a>
+        <div class="row">
+            <div class="image-section col-12">
+                <img src="img/bg-user.jpg" alt="anh bia">
+            </div>
+            <div class="row user-profile col-12">
+                <div class="user-profile-left col-sm-4 col-12">
+                    <div class="avatar">
+                        <img src="img/avatar-user.jpg" alt="avatar" class="rounded-circle">
+                    </div>
+                    <p class="display-name"><%=currentUser.name;%></p>
+                    <p>Follower: 100</p>
+                    <button class="btn btn-success">Follow</button>
+                    <button class="btn btn-primary mt-10">Message</button>
+                </div>
+                <div class="user-profile-right col-sm-8 col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <h1>PROFILE</h1>
+                            <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#information">Information</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#photos">Photos</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane container active" id="information">
+                                    <div>
+ 					Địa chỉ email: <span><%=currentUser.email;%></span>
+				    </div>
+				    <div>
+ 					Số điện thoại: <span><%=currentUser.phone;%></span>
+				    </div>
+                                </div>
+                                <div class="tab-pane container fade" id="photos">
+                                    photos
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

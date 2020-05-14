@@ -1,0 +1,487 @@
+﻿*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: brown;
+    text-align: -webkit-center;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style-type: none;
+}
+.w-100{
+    width: 100vw;
+}
+.h-100{
+    height: 100px;
+}
+.mt-50{
+    margin-top: 50px !important;
+}
+.mt--120{
+    margin-top: -120px !important;
+    border-top: 1px solid black;
+    padding-top: 20px;
+}
+.ml-50{
+    margin-left: 50px;
+}
+.bg-color{
+    background-color: #DEE8FC;
+}
+.clear-fix::after{
+    content: "";
+    clear: both;
+    display: block;
+}
+.logo{
+    width: 35%;
+    height: 100px;
+    float: left;
+    padding-left: 2vw;
+    box-sizing: border-box;
+}
+.logo>a{
+    display: block;
+    height: 72px;
+    width: 72px;
+    margin-top: 14px;
+    float: left;
+}
+.logo>span{
+    display: block;
+    height: 100px;
+    font-size: 30px;
+    color: rgb(240, 178, 86);
+    padding-top: 32px;
+    box-sizing: border-box;
+    margin-left: 2vw;
+    float: left;
+    /* responsive: 900px */
+}
+.top-menu{
+    width: 62%;
+    height: 72px;
+    float: right;
+}
+.top-menu-title>li{
+    float: left;
+    width: 15vw;
+    height: 100px;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 32px;
+    box-sizing: border-box;
+    position: relative;
+}
+.top-menu-title>li>a{
+    display: block;
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 32px;
+}
+.top-menu-title>li:hover{
+    background-color: #fafafa;
+}
+
+.btn:hover{
+    background-color: #fafafa;
+}
+
+/* Thân chương trình homepage */
+
+.content-page{
+    margin-top: 10px;
+    height: 600px;
+}
+
+/*#region CSS-Login-Page*/
+/* HEADER LOGIN PAGE */
+.header-login-page{
+    height: 100px;
+    width: 98vw;
+    background-color: #373c62;
+}
+.header-login-page>span{
+    display: block;
+    font-size: 30px;
+    width: 100%;
+    font-weight: 800;
+    color: #fbdf95;
+    text-align: center;
+    padding-top: 35px;
+}
+/* CONTENT LOGIN PAGE */
+.content-login-page{
+    width: 98vw;
+    background-color: #fafafa;
+    min-height: 400px;
+}
+.form-block{
+    width: 70%;
+    min-height: 300px;
+    background-color: white;
+    margin: 0 auto;
+    padding-top: 10px;
+    padding: 10px 0;
+    margin-top: 100px
+}
+.form-block>.title{
+    margin-top: 10px;
+}
+.form-block>.title>span{
+    display: inline-block;
+    width: 10%;
+    text-align: right;
+}
+
+input[type=submit]{
+    padding: 16px 32px;
+    background-color: #fbdf95;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 35%;
+}
+input[type=email]:hover, input[type=password]:hover, input[type="submit"]:hover{
+    background-color: #fafafa;
+}
+/* FOOTER */
+.footer{
+    background-color: #35353d;
+    width: 98vw;
+    height: 100px;
+}
+.footer>span{
+    display: block;
+    color: white;
+    width: 30%;
+    height: 100%;
+    line-height: 100px;
+}
+/*#endregion */
+
+
+/* #region homepage */
+.block-content{
+    position: relative;
+}
+.bg-homepage{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+.logan-homepage{
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 20%;
+    width: 60%;
+    height: auto;
+    font-size: 30px;
+    color: yellow;
+}
+.letdoit{
+    display: block;
+    position: absolute;
+    top: 100px;
+    right: 30%;
+    width: 100px;
+    height: 60px;
+    background-color: white;
+
+}
+.checklist{
+    display: block;
+    position: absolute;
+    top: 200px;
+    right: 30%;
+    width: 200px;
+    height: 60px;
+    background-color: white;
+}
+.form-homepage{
+    display: block;
+    position: absolute;
+    top: 50px;
+    left: 50%;
+}
+.back-icon{
+    display: block;
+    position: absolute;
+    top: 400px;
+    right: 10%;
+    width: 72px;
+    height: 72px;
+}
+/* #endregion */
+
+@import url('https://fonts.googleapis.com/css?family=Gothic+A1|Kaushan+Script|Libre+Baskerville|Lobster');
+body{
+	font-family: 'Gothic A1', sans-serif;
+	font-size:16px;
+	}
+	p{
+	color:#6c6c6f;
+	font-size:1em;
+	}
+    h1,h2,h3,h4,h5,h6{color:#323233;text-transform:uppercase;
+}
+.navbar-brand {
+	color: #fff;
+	font-size:25px;
+    font-family: 'Kaushan Script','Helvetica Neue',Helvetica,Arial,cursive;
+	font-weight:700;
+	letter-spacing:0.1em;
+}
+.navbar-nav .nav-item .nav-link{
+	padding: 1.1em 1em!important;
+	font-size: 120%;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: #fff;
+   font-family: 'Gothic A1', sans-serif;
+}
+.dropdown-item:hover{
+    background-color:#fed136;color:#fff;
+}
+nav{
+    -webkit-transition: padding-top .3s,padding-bottom .3s;
+    -moz-transition: padding-top .3s,padding-bottom .3s;
+    transition: padding-top .3s,padding-bottom .3s;
+    border: none;
+}
+.shrink {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #fafafa;
+    color: black!important;
+}
+.banner{
+	background-image:url('../img/bg1.jpg');
+	text-align: center;
+    color: #fff;
+   
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+.banner-text{
+	padding:200px 0 150px 0;
+}
+.banner-heading{
+	font-family: 'Lobster', cursive;
+	font-size: 75px;
+    font-weight: 700;
+    line-height: 100px;
+    margin-bottom: 30px;
+	color:#fff;
+}
+.banner-sub-heading{
+	font-family: 'Libre Baskerville', serif;
+	font-size: 30px;
+    font-weight: 300;
+    line-height: 30px;
+    margin-bottom: 50px;
+	color:#fff;
+}
+
+.btn {
+  height: 100%;
+  width: auto;
+  display: inline-block;
+}
+
+.btn-warning{
+  background-color: #ffc107!important;
+}
+
+@media (max-width:500px){
+	.navbar-nav{
+		background-color:#000;
+		border-top:3px solid #fed136;
+		color:#fff;
+		z-index:1;
+		margin-top:5px;
+	}
+	.navbar-nav .nav-item .nav-link{
+	    padding: 0.7em 1em!important;
+	    font-size: 100%;
+        font-weight: 500;
+    }
+	.banner-text{
+	    padding:150px 0 150px 0;
+    }
+    .banner-heading{
+	    font-size: 30px;
+        line-height: 30px;
+        margin-bottom: 20px;
+    }
+    .banner-sub-heading{
+	    font-size: 10px;
+        font-weight: 200;
+        line-height: 10px;
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width:768px){
+	.banner-text{
+	    padding:150px 0 150px 0;
+    }
+    .banner-sub-heading{
+	    font-size: 23px;
+        font-weight: 200;
+        line-height: 23px;
+        margin-bottom: 40px;
+    }
+    .navbar-nav{
+		background-color: #000;
+		border-top:3px solid #fed136;
+		color:#fff;
+		z-index:1;
+		margin-top:5px;
+    }
+    .navbar-brand{
+        color: black!important;
+    }
+}
+
+
+
+/* todolist page */
+.todolist-block{
+    min-height: 600px;
+    background-color: #fafafa;
+    margin-top: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+.todo-item-block{
+    height: 100px;
+}
+.todo-item-block>a{
+    width: 100%;
+    height: 100%;
+    padding-top: 15%;
+}
+.btn-primary:hover{
+    background-color: #fafafa;
+    color: black;
+}
+.todolist-header{
+    height: 96px;
+    margin-top: 60px;
+    display: block;
+    margin-bottom: -120px;
+}
+.todolist-header>h1{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.btn-menu-block{
+    height: 50px;
+    margin-bottom: 100px;
+}
+.btn-add-div{
+    width: 100px;
+    height: 50px;
+    line-height: 40px;
+    text-align: right
+}
+.btn-add{
+    width: 100px;
+    height: 50px;
+    line-height: 40px;
+    text-align: center;
+}
+.btn-history-div{
+    width: 100px;
+    height: 50px;
+    line-height: 40px;
+    text-align: left;
+}
+.btn-history{
+    width: 100px;
+    height: 50px;
+    line-height: 40px;
+    text-align: center;
+}
+.btn-back-div{
+    width: 100px;
+    height: 50px;
+    line-height: 40px;
+    text-align: left;
+}
+.btn-back{
+    width: 100px;
+    height: 50px;
+    line-height: 40px;
+    text-align: center;
+}
+.btn-back:hover{
+    background-color: #fafafa;
+    color: black;
+}
+
+@media (max-width:500px){
+    .todolist-header{
+  	margin-bottom: 0;
+    }
+    .btn-back-div{
+	margin-top: 80px;
+	margin-bottom: 40px;
+    }
+}
+
+.todo-done-list-block{
+    padding-top: 50px;
+    border-top: 1px solid black;
+}
+
+/* ADD WORK */
+.add-form-block{
+    margin-top: 200px;
+    min-height: 400px;
+}
+.add-form-block span{
+    display: block;
+    font-size: 36px;
+    color: white;
+    height: 59px;
+    line-height: 59px;
+}
+.add-form-block input[type="text"]{
+    padding: 14px 28px;
+    font-size: 18px;
+}
+.add-form-block input[type="submit"]{
+    height: 59px;
+    width: 100px;
+    padding: 14px 28px;
+    background-color: yellow;
+}
+
+
+
+
+
+
