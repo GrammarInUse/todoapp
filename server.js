@@ -19,7 +19,7 @@ app.use(cookieSession({
 }));
 
 app.get("/", (req, res) => {
-    res.send("Hola World!!");
+    res.redirect("/home");
 });
 
 app.get("/login", (req, res, next) =>{
@@ -62,15 +62,18 @@ app.get("/profile", (req, res) => {
 
 app.get("/todolist", async (req, res) => {
     const currentUser = req.session.currentUser;
+    const listOfTodos = await Todos.findTodoByNotDone(currentUser.id);
+    req.session.listOfNotDoneTodos = listOfTodos;
+    const listOfNotDoneTodos = req.session.listOfNotDoneTodos;
+    res.render("todolist", {listOfNotDoneTodos, currentUser});
+});
+
+app.get("/history", async (req, res) => {
+    const currentUser = req.session.currentUser;
     const listOfTodos = await Todos.findTodoByDone(currentUser.id);
     req.session.listOfDoneTodos = listOfTodos;
-    const listOfDoneTodos = req.session.listOfDoneTodos;
-    if(listOfDoneTodos){
-        res.render("todolist", {listOfDoneTodos, currentUser});
-    }
-    else{
-        res.render("emptylist");
-    }
+    const listOfDoneTodos = req.session.listOfNotDoneTodos;
+    res.render("history", {listOfDoneTodos, currentUser});
 });
 
 app.get("/addwork", (req, res) => {

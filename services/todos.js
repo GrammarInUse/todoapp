@@ -6,6 +6,14 @@ class todos extends Model{
     static async findTodoByDone(id) {
         return await todos.findAll({
             where: {
+                is_done: true,
+                userId: id
+            }
+        });
+    }
+    static async findTodoByNotDone(id) {
+        return await todos.findAll({
+            where: {
                 is_done: false,
                 userId: id
             }
@@ -25,7 +33,7 @@ class todos extends Model{
         var todoId = (await listOfTodos).length + 1;
         return await todos.create({
             id: todoId,
-            name: name || "Khong co du lieu",
+            name: name,
             is_done: false,
             userId: userId
         });
