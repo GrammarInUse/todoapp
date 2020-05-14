@@ -72,7 +72,7 @@ app.get("/history", async (req, res) => {
     const currentUser = req.session.currentUser;
     const listOfTodos = await Todos.findTodoByDone(currentUser.id);
     req.session.listOfDoneTodos = listOfTodos;
-    const listOfDoneTodos = req.session.listOfNotDoneTodos;
+    const listOfDoneTodos = req.session.listOfDoneTodos;
     res.render("history", {listOfDoneTodos, currentUser});
 });
 
