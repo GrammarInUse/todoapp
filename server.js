@@ -31,7 +31,6 @@ app.get("/login", (req, res, next) =>{
 });
 
 app.post("/login", urlEncodedParser, async (req, res) => {
-    db.sync();
     if(req.session.currentUser){
         req.redirect("/home");
     }
