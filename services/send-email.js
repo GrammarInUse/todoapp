@@ -11,7 +11,7 @@ async function Send(user){
         }
     });
 
-    const url = (process.env.BASE_URL || "localhost:3000") + ("/signup/" + user.id + "/" + user.token);
+    const url = (process.env.BASE_URL || "localhost:3000") + ("signup/" + user.id + "/" + user.token);
 
     return await transporter.sendMail({
         from: 'Ly Ly <hlb0932055041@gmail.com>',
