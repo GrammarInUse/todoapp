@@ -31,6 +31,7 @@ app.get("/login", (req, res, next) =>{
 });
 
 app.post("/login", urlEncodedParser, async (req, res) => {
+    db.sync();
     if(req.session.currentUser){
         req.redirect("/home");
     }
@@ -141,6 +142,8 @@ db.sync().then(async function(){
     app.listen(port, function(){
         console.log("KET NOI THANH CONG");
     });
+}).catch((err) => {
+    console.log(err);
 });
 
 
