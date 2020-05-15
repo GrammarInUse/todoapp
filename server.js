@@ -136,13 +136,11 @@ app.get("/comfirm-email", (req, res)=>{
     res.render("comfirm-email");
 });
 
-db.sync().then(function(){
+db.sync().then(async function(){
     const port = process.env.PORT || 3000;
     app.listen(port, function(){
         console.log("KET NOI THANH CONG");
     });
-}).catch(function(){
-    console.log("Loi roi");
 });
 
 
