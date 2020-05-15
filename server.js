@@ -1,10 +1,11 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
-var Users = require("./services/users").users;
+const Users = require("./services/users").users;
 const Todos = require("./services/todos").todos;
 var db = require("./services/db").db;
 const pg = require("pg");
+const Email = require("./services/send-email");
 
 const app = express();
 app.set("view engine", "ejs");
@@ -37,7 +38,7 @@ app.post("/login", urlEncodedParser, async (req, res) => {
     if(!user){
         res.redirect("/login");
     }else{
-        if(!(await Users.verifyPassword(req.body.password, user.password))){
+        if(!(await Users.verifyPassword(req.body.password, user.password)) || user.token!=null){
             res.redirect("/login");
         }
         else{
@@ -46,6 +47,39 @@ app.post("/login", urlEncodedParser, async (req, res) => {
         }
     }
 });
+app.get("/signup", (req, res) => {
+    res.render("signup");
+});
+app.post("/signup", urlEncodedParser,async (req, res) => {
+    const id = (await Users.findAll()).length + 1;
+    const username = req.body.username;
+    const email = req.body.email;
+    const password = req.body.password;
+    const comfirmpassword = req.body.comfirmpassword;
+    const fullname = req.body.fullname;
+    const phone = req.body.phone;
+
+    const tempUser = await Users.signUp(username, email, password, comfirmpassword, fullname, phone).then(console.log("Seccess"));
+
+    await Email.Send(tempUser);
+    console.log(tempUser);
+
+    res.redirect("/comfirm-email")
+});
+app.get("/signup/:id/:token", async (req, res) => {
+    console.log(req.params.id);
+    console.log(req.params.token);
+    const user = await Users.findUserById(req.params.id);
+    console.log("User lấy từ thanh địa chỉ: ",user);
+    
+    if(req.params.token == user.token){
+        user.token = null;
+        await user.save();
+    }
+    //req.session.currentUser = user;
+    res.redirect("/login");
+});
+
 
 app.get("/home", (req, res) => {
     const currentUser = req.session.currentUser;
@@ -97,6 +131,9 @@ app.get("/logout", (req, res) => {
 app.get("/xulyxong/:id", (req, res) => {
     Todos.markAsDone(req.params.id);
     res.redirect("/todolist");
+});
+app.get("/comfirm-email", (req, res)=>{
+    res.render("comfirm-email");
 });
 
 db.sync().then(function(){
