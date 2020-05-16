@@ -4,8 +4,11 @@ const cookieSession = require("cookie-session");
 const Users = require("./services/users").users;
 const Todos = require("./services/todos").todos;
 var db = require("./services/db").db;
+const fs = require("fs");
 const pg = require("pg");
 const Email = require("./services/send-email");
+const uploadAvatar = require("./services/upload-file").uploadAvatar;
+const uploadBackground = require("./services/upload-file").uploadBackground;
 
 const app = express();
 app.set("view engine", "ejs");
@@ -35,10 +38,10 @@ app.post("/login", urlEncodedParser, async (req, res) => {
         req.redirect("/home");
     }
     var user = await Users.findUserByUsername(req.body.username);
-    if(!user){
+    if(user == null){
         res.redirect("/login");
     }else{
-        if(!(await Users.verifyPassword(req.body.password, user.password)) || user.token!=null){
+        if((await Users.verifyPassword(req.body.password, user.password)) === false || user.token != null){
             res.redirect("/login");
         }
         else{
@@ -81,10 +84,22 @@ app.get("/signup/:id/:token", async (req, res) => {
 });
 
 
-app.get("/home", (req, res) => {
+app.get("/home", async (req, res) => {
+    var tempUser = null;
     const currentUser = req.session.currentUser;
     if(currentUser){
+        tempUser = await Users.findUserById(currentUser.id);
+    }
+    
+    if(currentUser && !tempUser){
+        delete req.session.currentUser;
+        res.render("home-notlogin");
+    }
+    else if(currentUser && tempUser){
         res.render("home", {currentUser});
+    }
+    else if(!currentUser && tempUser){
+        res.render("home-notlogin");
     }
     else res.render("home-notlogin");
 });
@@ -134,6 +149,35 @@ app.get("/xulyxong/:id", (req, res) => {
 });
 app.get("/comfirm-email", (req, res)=>{
     res.render("comfirm-email");
+});
+
+app.get("/upload-file", (req, res) => {
+    res.render("upload-file");
+});
+
+app.get("/upload-avatar", (req, res) => {
+    res.render("upload-file.ejs");
+});
+
+app.post("/upload-avatar", uploadAvatar.single("file"), (req, res, next) => {
+    const file = req.file;
+    if(!file){
+        const error = new Error("Please upload a image file");
+        error.httpStatusCode = 400;
+        return next(error);
+    }else{
+        res.redirect("/profile");
+    }
+});
+app.post("/upload-background", uploadBackground.single("file"), (req, res, next) => {
+    const file = req.file;
+    if(!file){
+        const error = new Error("Please upload a image file");
+        error.httpStatusCode = 400;
+        return next(error);
+    }else{
+        res.redirect("/profile");
+    }
 });
 
 db.sync().then(async function(){

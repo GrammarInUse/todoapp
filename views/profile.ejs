@@ -8,19 +8,38 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <link rel="stylesheet" href="css/profile.css">
 </head>
 <body>
     <div class="container-fluid">
-	<a href="/home" class="btn btn-warning back">Trở lại</a>
         <div class="row">
+            <a href="/home" class="btn btn-warning back">Trở lại</a>
             <div class="image-section col-12">
                 <img src="img/bg-user.jpg" alt="anh bia">
+                <div class="changeBackground">
+                    <a href="#" class="btn btn-dark">Upload</a>
+                </div>
+<script>
+    $(".changeBackground").on("click", function(){
+        $(".form-upload-background").addClass("appear");
+        $(".block-fullscreen-gray").addClass("appear");
+    });
+</script>
             </div>
             <div class="row user-profile col-12">
                 <div class="user-profile-left col-sm-4 col-12">
                     <div class="avatar">
                         <img src="img/avatar-user.jpg" alt="avatar" class="rounded-circle">
+                        <div class="changeAvatar">
+                            <a href="#" class="btn btn-dark">Upload</a>
+                        </div>
+<script>
+    $(".changeAvatar").on("click", function(){
+        $(".form-upload-avatar").addClass("appear");
+        $(".block-fullscreen-gray").addClass("appear");
+    });
+</script>
                     </div>
                     <p class="display-name"><%=currentUser.name;%></p>
                     <p>Follower: 100</p>
@@ -58,5 +77,45 @@
             </div>
         </div>
     </div>
+    <!-- FORM TO CHANGE AVATAR -->
+    <div>
+        <div class="block-fullscreen-gray"></div>
+        <div class="row form-upload-avatar">
+            <div class="col-12">
+                <a href="#" class="x-button"><i class="fas fa-times"></i></a>
+            </div>
+            <div class="col-lg-8 col-12">
+                <form action="/upload-avatar" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="image/*">
+                    <input type="submit" value="Upload">
+                </form>
+            </div>
+            <div class="col-lg-2 col-12">
+    
+            </div>
+        </div>
+<!-- FORM TO CHANGE BACKGROUND -->
+        <div class="row form-upload-background">
+            <div class="col-12">
+                <a href="#" class="x-button"><i class="fas fa-times"></i></a>
+            </div>
+            <div class="col-lg-8 col-12">
+                <form action="/upload-background" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="image/*">
+                    <input type="submit" value="Upload">
+                </form>
+            </div>
+            <div class="col-lg-2 col-12">
+    
+            </div>
+        </div>
+    </div>
 </body>
 </html>
+<script>
+    $(".x-button").on("click", function(){
+        $(".form-upload-avatar").removeClass("appear");
+        $(".block-fullscreen-gray").removeClass("appear");
+        $(".form-upload-background").removeClass("appear");
+    });
+</script>

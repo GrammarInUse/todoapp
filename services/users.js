@@ -6,8 +6,8 @@ sequelize = db.db;
 const Model = Sequelize.Model;
 class users extends Model { 
     static verifyPassword(password, passwordDB){
-        if(password == passwordDB) return true;
-        else return false;
+        if(password != passwordDB) return false;
+        else return true;
     }
     static async signUp(userName, mail, pass, comfirmPass, fullName, phone){
         const listOfUsers = users.findAll();

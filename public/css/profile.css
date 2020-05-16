@@ -11,20 +11,25 @@ li{
 }
 .back{
   margin-top: 10px;
-  margin-left: 14px;
+  margin-left: 40px;
+  z-index: 10;
 }
 .image-section{
   margin-top: -48px;
   min-height: 300px;
   height: 300px;
   overflow: hidden;
-  z-index: -1;
+  position: relative;
 }
 .image-section>img{
   min-height: 300px;
   height: auto;
   margin-top: -500px;
   width: 100%;
+  cursor: pointer;
+}
+.image-section:hover .changeBackground{
+  visibility: visible!important;
 }
 .user-profile{
   margin: 0;
@@ -41,6 +46,7 @@ li{
   height: 50px;
 }
 .avatar{
+  position: relative;
   height: 200px;
   width: 200px;
   margin: 0 auto;
@@ -48,10 +54,31 @@ li{
   border: 1px solid black;
   border-radius: 140px;
   background-color: white;
+  overflow: hidden;
 } 
 .avatar>img{
   height: 200px;
   width: 200px;
+  cursor: pointer;
+}
+.avatar:hover .changeAvatar{
+  visibility: visible;
+  opacity: 0.8;
+}
+.changeAvatar{
+  position: absolute;
+  top: 158px;
+  left: 20px;
+  width: 160px;
+  height: 40px;
+  opacity: 0.8;
+  visibility: hidden;
+}
+.changeAvatar>a{
+  width: 160px;
+  height: 42px;
+  border-bottom-left-radius: 42px;
+  border-bottom-right-radius: 42px;
 }
 .display-name{
   margin-bottom: 60px;
@@ -82,4 +109,91 @@ li{
   }
 }
 
+/* FORM UPLOAD BACKGROUND */
 
+.form-upload-background{
+  position: fixed;
+  height: 74px;
+  width: 50%;
+  top: 10%;
+  left: 25%;
+  border: 1px solid #fafafa;
+  background-color: lightslategrey;
+  visibility: hidden;
+  z-index: 100;
+  overflow: hidden;
+}
+.form-upload-background>.col-8{
+  margin-top: 20px;
+}
+.form-upload-background>.col-2>a{
+  margin-left: 80%;
+  margin-top: 10%;
+}
+
+
+.changeBackground{
+  width: 100px;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 1%;
+  opacity: 0.8;
+  visibility: hidden;
+}
+.changeBackground>a{
+  width: 100%;
+  height: 100%;
+  line-height: 270px;
+  display: block;
+  text-align: center;
+}
+
+/* FORM UPLOAD AVATAR */
+
+.form-upload-avatar{
+  position: fixed;
+  height: 74px;
+  width: 50%;
+  top: 10%;
+  left: 25%;
+  border: 1px solid #fafafa;
+  background-color: lightslategrey;
+  visibility: hidden;
+  z-index: 100;
+  overflow: hidden;
+}
+.form-upload-avatar>.col-8{
+  margin-top: 20px;
+}
+.form-upload-avatar>.col-2>a{
+  margin-left: 80%;
+  margin-top: 10%;
+}
+
+.appear{
+  visibility: visible!important;
+}
+.disappear{
+  visibility: hidden!important;
+}
+
+.block-fullscreen-gray{
+  background-color: lightslategrey;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0.2;
+  visibility: hidden;
+}
+
+@media (max-width: 420px){
+  .form-upload-avatar{
+    height: 130px;
+    width: 80%;
+    left: 13%;
+  }
+}
