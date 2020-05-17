@@ -212,7 +212,23 @@ app.post("/upload-photo", uploadPhoto().single("file"), async (req, res, next) =
 });
 
 app.get("/delete-photo/:id", async (req, res) => {
+    let currentUser = req.session.currentUser;
     Photos.deleteById(req.params.id);
+    let path = "./public/PhotosOfId" + currentUser.id + "/photo-" + req.params.id + ".jpeg";
+    fs.unlink(path, (err) => {
+        if(err) console.log("Err: ", err);
+        else console.log("Success")
+    });
+    path = "./public/PhotosOfId" + currentUser.id + "/photo-" + req.params.id + ".png";
+    fs.unlink(path, (err) => {
+        if(err) console.log("Err: ", err);
+        else console.log("Success")
+    });
+    path = "./public/PhotosOfId" + currentUser.id + "/photo-" + req.params.id + ".jpg";
+    fs.unlink(path, (err) => {
+        if(err) console.log("Err: ", err);
+        else console.log("Success")
+    });
 
     res.redirect("/profile");
 });
