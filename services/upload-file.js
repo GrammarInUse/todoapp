@@ -26,7 +26,7 @@ function uploadBackground(){
         {
             destination: (req, file, cb) =>{
                 const currentUser = req.session.currentUser;
-                cb(null, './public/PhoTosOfId' + currentUser.id);
+                cb(null, './public/PhotosOfId' + currentUser.id);
             },
             filename: function(req, file, cb){
                 cb(null, "bg-user.jpg");
