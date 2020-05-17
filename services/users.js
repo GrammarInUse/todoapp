@@ -93,6 +93,16 @@ users.init(
             type: Sequelize.TEXT,
             allowNull: true,
             unique: true
+        },
+        avatar: {
+            type: Sequelize.TEXT,
+            allowNull: false,
+            defaultValue: "default-avatar.png"
+        },
+        background: {
+            type: Sequelize.TEXT,
+            allowNull: false,
+            defaultValue: "default-bg.png"
         }
     },
     {   

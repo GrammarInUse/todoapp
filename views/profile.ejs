@@ -16,7 +16,17 @@
         <div class="row">
             <a href="/home" class="btn btn-warning back">Trở lại</a>
             <div class="image-section col-12">
-                <img src="img/bg-user.jpg" alt="anh bia">
+<% 
+    if(currentUser.background === "default-bg.png"){  
+%> 
+                <img src="img/<%= currentUser.background; %> " alt="anh bia">
+<% 
+    }else if(currentUser.background === "bg-user.jpg"){
+%> 
+                <img src="PhotosOfId<%=currentUser.id;%>/bg-user.jpg" alt="anh bia">
+<% 
+    }
+%> 
                 <div class="changeBackground">
                     <a href="#" class="btn btn-dark">Upload</a>
                 </div>
@@ -30,7 +40,18 @@
             <div class="row user-profile col-12">
                 <div class="user-profile-left col-sm-4 col-12">
                     <div class="avatar">
-                        <img src="img/avatar-user.jpg" alt="avatar" class="rounded-circle">
+<% 
+    if(currentUser.avatar === "default-avatar.png"){  
+        console.log(currentUser.avatar);
+%> 
+                        <img src="img/<%= currentUser.avatar; %>" alt="avatar" class="rounded-circle">
+<%
+    }else if(currentUser.avatar === "avatar-user.jpg"){
+%>
+                        <img src="PhotosOfId<%=currentUser.id;%>/avatar-user.jpg" alt="avatar" class="rounded-circle">
+<%
+    }
+%>
                         <div class="changeAvatar">
                             <a href="#" class="btn btn-dark">Upload</a>
                         </div>
@@ -42,9 +63,15 @@
 </script>
                     </div>
                     <p class="display-name"><%=currentUser.name;%></p>
-                    <p>Follower: 100</p>
-                    <button class="btn btn-success">Follow</button>
-                    <button class="btn btn-primary mt-10">Message</button>
+                    <p>Photos: <%=listOfPhotos.length;%></p>
+                    <a href="#" class="btn btn-success btn-upload">Upload Photo</a>
+<script>
+    $(".btn-upload").on("click", function(){
+        $(".form-upload-photo").addClass("appear");
+        $(".block-fullscreen-gray").addClass("appear");
+    });
+</script>
+                    <button class="btn btn-primary mt-10">Message Box</button>
                 </div>
                 <div class="user-profile-right col-sm-8 col-12">
                     <div class="row">
@@ -52,14 +79,14 @@
                             <h1>PROFILE</h1>
                             <ul class="nav nav-tabs">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#information">Information</a>
+                                    <a class="nav-link" data-toggle="tab" href="#information">Information</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#photos">Photos</a>
+                                    <a class="nav-link active" data-toggle="tab" href="#photos">Photos</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane container active" id="information">
+                                <div class="tab-pane container fade" id="information">
                                     <div>
  					Địa chỉ email: <span><%=currentUser.email;%></span>
 				    </div>
@@ -67,8 +94,22 @@
  					Số điện thoại: <span><%=currentUser.phone;%></span>
 				    </div>
                                 </div>
-                                <div class="tab-pane container fade" id="photos">
-                                    photos
+                                <div class="container-fluid tab-pane active" id="photos">
+                                    <div class="row">
+<%
+    listOfPhotos.forEach(photo => {
+%>
+                                        <div class="col-4 position-rela block<%=photo.id;%>">
+                                            <img src="PhotosOfId<%=currentUser.id;%>/<%=photo.name;%>.<%=photo.extension;%>" alt="photo">
+                                            <a href="/delete-photo/<%=photo.id;%>" class="btn btn-warning">Xóa</a>
+                                            <div class="block-fullscreen-photo">
+                                                
+                                            </div>
+                                        </div>
+<%         
+    });
+%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -77,9 +118,10 @@
             </div>
         </div>
     </div>
-    <!-- FORM TO CHANGE AVATAR -->
     <div>
-        <div class="block-fullscreen-gray"></div>
+        <div class="block-fullscreen-gray">
+            
+        </div>
         <div class="row form-upload-avatar">
             <div class="col-12">
                 <a href="#" class="x-button"><i class="fas fa-times"></i></a>
@@ -94,13 +136,26 @@
     
             </div>
         </div>
-<!-- FORM TO CHANGE BACKGROUND -->
         <div class="row form-upload-background">
             <div class="col-12">
                 <a href="#" class="x-button"><i class="fas fa-times"></i></a>
             </div>
             <div class="col-lg-8 col-12">
                 <form action="/upload-background" method="POST" enctype="multipart/form-data">
+                    <input type="file" name="file" accept="image/*">
+                    <input type="submit" value="Upload">
+                </form>
+            </div>
+            <div class="col-lg-2 col-12">
+    
+            </div>
+        </div>
+        <div class="row form-upload-photo">
+            <div class="col-12">
+                <a href="#" class="x-button"><i class="fas fa-times"></i></a>
+            </div>
+            <div class="col-lg-8 col-12">
+                <form action="/upload-photo" method="POST" enctype="multipart/form-data">
                     <input type="file" name="file" accept="image/*">
                     <input type="submit" value="Upload">
                 </form>
@@ -117,5 +172,6 @@
         $(".form-upload-avatar").removeClass("appear");
         $(".block-fullscreen-gray").removeClass("appear");
         $(".form-upload-background").removeClass("appear");
+        $(".form-upload-photo").removeClass("appear");
     });
 </script>

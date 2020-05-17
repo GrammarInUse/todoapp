@@ -3,12 +3,14 @@ const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
 const Users = require("./services/users").users;
 const Todos = require("./services/todos").todos;
+const Photos = require("./services/photos").photos;
 var db = require("./services/db").db;
 const fs = require("fs");
 const pg = require("pg");
 const Email = require("./services/send-email");
 const uploadAvatar = require("./services/upload-file").uploadAvatar;
 const uploadBackground = require("./services/upload-file").uploadBackground;
+const uploadPhoto = require("./services/upload-file").uploadPhoto;
 
 const app = express();
 app.set("view engine", "ejs");
@@ -104,9 +106,15 @@ app.get("/home", async (req, res) => {
     else res.render("home-notlogin");
 });
 
-app.get("/profile", (req, res) => {
-    const currentUser = req.session.currentUser;
-    res.render("profile", {currentUser});
+app.get("/profile", async (req, res) => {
+    const currentUser = await Users.findUserById(req.session.currentUser.id);
+    const listOfPhotos = await Photos.findByUserId(currentUser.id);
+    console.log(listOfPhotos.length);
+
+    fs.mkdir("./public/PhotosOfId" + currentUser.id, () => {
+        console.log("Tao new folder thanh cong");
+    });
+    res.render("profile", {currentUser, listOfPhotos});
 });
 
 app.get("/todolist", async (req, res) => {
@@ -159,8 +167,13 @@ app.get("/upload-avatar", (req, res) => {
     res.render("upload-file.ejs");
 });
 
-app.post("/upload-avatar", uploadAvatar.single("file"), (req, res, next) => {
-    const file = req.file;
+app.post("/upload-avatar", uploadAvatar().single("file"), async (req, res, next) => {
+    const user = await Users.findUserById(req.session.currentUser.id);
+    console.log(user);
+    user.avatar = "avatar-user.jpg";
+    await user.save();
+    req.session.currentUser = user;
+    const file = await req.file;
     if(!file){
         const error = new Error("Please upload a image file");
         error.httpStatusCode = 400;
@@ -169,8 +182,13 @@ app.post("/upload-avatar", uploadAvatar.single("file"), (req, res, next) => {
         res.redirect("/profile");
     }
 });
-app.post("/upload-background", uploadBackground.single("file"), (req, res, next) => {
-    const file = req.file;
+app.post("/upload-background", uploadBackground().single("file"), async (req, res, next) => {
+    const user = await Users.findUserById(req.session.currentUser.id);
+    console.log(user);
+    user.background = "bg-user.jpg";
+    await user.save();
+    req.session.currentUser = user;
+    const file = await req.file;
     if(!file){
         const error = new Error("Please upload a image file");
         error.httpStatusCode = 400;
@@ -178,6 +196,25 @@ app.post("/upload-background", uploadBackground.single("file"), (req, res, next)
     }else{
         res.redirect("/profile");
     }
+});
+
+app.post("/upload-photo", uploadPhoto().single("file"), async (req, res, next) => {
+    const listOfPhotos = await Photos.findByUserId(req.session.currentUser.id);
+    console.log(listOfPhotos);
+    const file = await req.file;
+    if(!file){
+        const error = new Error("Please upload a image file");
+        error.httpStatusCode = 400;
+        return next(error);
+    }else{
+        res.redirect("/profile");
+    }
+});
+
+app.get("/delete-photo/:id", async (req, res) => {
+    Photos.deleteById(req.params.id);
+
+    res.redirect("/profile");
 });
 
 db.sync().then(async function(){

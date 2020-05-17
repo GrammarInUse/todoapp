@@ -9,6 +9,9 @@
 li{
   list-style-type: none;
 }
+.position-rela{
+  position: relative!important;
+}
 .back{
   margin-top: 10px;
   margin-left: 40px;
@@ -16,15 +19,13 @@ li{
 }
 .image-section{
   margin-top: -48px;
-  min-height: 300px;
   height: 300px;
   overflow: hidden;
   position: relative;
 }
 .image-section>img{
-  min-height: 300px;
-  height: auto;
-  margin-top: -500px;
+  height: 500px;
+  margin-top: -100px;
   width: 100%;
   cursor: pointer;
 }
@@ -43,7 +44,8 @@ li{
 }
 .user-profile-left>.btn{
   width: 60%;
-  height: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .avatar{
   position: relative;
@@ -90,6 +92,36 @@ li{
   height: 400px;
   width: 100%;
   border-left: 1px solid black;
+}
+
+#photos>.row>.col-4{
+  overflow: hidden;
+}
+
+#photos>.row>.col-4>img{
+  width: auto;
+  min-width: 263.66px;
+  height: 230px;
+  margin-bottom: 10px;
+}
+
+.block-fullscreen-photo{
+  position: absolute;
+  top: 0;
+  left: 6%;
+  width: 263.66px;
+  height: 230px;
+  background-color: red;
+  opacity: 0.4;
+  visibility: hidden;
+}
+
+#photos>.row>.col-4>a{
+  width: 94%;
+  position: absolute;
+  top: 80%;
+  left: 6%;
+  
 }
 
 @media (max-width: 500px){
@@ -197,3 +229,19 @@ li{
     left: 13%;
   }
 }
+
+/* FORM UPLOAD PHOTO */
+
+.form-upload-photo{
+  position: fixed;
+  height: 74px;
+  width: 50%;
+  top: 10%;
+  left: 25%;
+  border: 1px solid #fafafa;
+  background-color: lightslategrey;
+  visibility: hidden;
+  z-index: 100;
+  overflow: hidden;
+}
+
