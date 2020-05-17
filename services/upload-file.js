@@ -25,7 +25,8 @@ function uploadBackground(){
     const storageBackground = multer.diskStorage(
         {
             destination: (req, file, cb) =>{
-                cb(null, './public/photosOfId' + req.session.currentUser.id);
+                const currentUser = req.session.currentUser;
+                cb(null, './public/PhoTosOfId' + currentUser.id);
             },
             filename: function(req, file, cb){
                 cb(null, "bg-user.jpg");
