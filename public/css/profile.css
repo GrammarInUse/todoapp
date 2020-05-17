@@ -94,11 +94,11 @@ li{
   border-left: 1px solid black;
 }
 
-#photos>.row>.col-4{
+#photos>.row>.blockPhotos{
   overflow: hidden;
 }
 
-#photos>.row>.col-4>img{
+#photos>.row>.blockPhotos>img{
   width: auto;
   min-width: 263.66px;
   height: 230px;
@@ -116,7 +116,7 @@ li{
   visibility: hidden;
 }
 
-#photos>.row>.col-4>a{
+#photos>.row>.blockPhotos>a{
   width: 94%;
   position: absolute;
   top: 80%;

@@ -99,7 +99,7 @@
 <%
     listOfPhotos.forEach(photo => {
 %>
-                                        <div class="col-4 position-rela block<%=photo.id;%>">
+                                        <div class="col-12 col-lg-4 position-rela blockPhotos">
                                             <img src="PhotosOfId<%=currentUser.id;%>/<%=photo.name;%>.<%=photo.extension;%>" alt="photo">
                                             <a href="/delete-photo/<%=photo.id;%>" class="btn btn-warning">Xóa</a>
                                             <div class="block-fullscreen-photo">

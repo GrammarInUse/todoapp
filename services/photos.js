@@ -21,7 +21,7 @@ class photos extends Model {
     static async getLostId(id){
         var iPos = 0;
         var lists = [];
-        var listOfPhotos = await photos.findByUserId(id);
+        var listOfPhotos = await photos.findAll();
         const len = listOfPhotos.length;
         var iNeed = 1, iSumOfList = 1;
         var bCheck = true;
